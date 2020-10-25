@@ -30,10 +30,11 @@ def computer(move_computer):
 #Function valid returns True if the position chosen is not occupied and False if the position is occupied.
 #Parameter: move -> the position chosen by both the computer and the player.
 def valid(move):
-    if board[move] == " ":
-        return True
-    elif move != ["1", "2", "3", "4", "5", "6", "7", "8", "9"]:
-        return False
+    if move=="1" or move=="2" or move=="3" or move=="4" or move=="5" or move=="6" or move=="7" or move=="8" or move=="9":  
+        if board[move] == " ":
+            return True
+        else:
+            return False
     else:
         return False
 
