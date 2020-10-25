@@ -32,7 +32,7 @@ def computer(move_computer):
 def valid(move):
     if board[move] == " ":
         return True
-    elif board[move] not in ["1", "2", "3", "4", "5", "6", "7", "8", "9"]:
+    elif move != ["1", "2", "3", "4", "5", "6", "7", "8", "9"]:
         return False
     else:
         return False
@@ -84,29 +84,30 @@ def win_computer():
 while True:
     show_board(board, board_positions)
     move_player=input("Choose a position in the board: ")
+    #If the computer has not won and the moves are less than 9 the player chooses an option, if the option is not valid it keeps asking for an option
     if(win_computer() == False and moves<=9):
         while(valid(move_player) == False):
             move_player=input("That position is not valid, choose another position in the board: ")
         player(move_player)
         moves+=1
-
+    #If the player has not won and the moves are less than 9 the computer chooses an option, if the option is not valid it keeps giving numbers until is valid
     move_computer= str(random.randint(1,9))
     if(win_player() == False and moves<=9):
         while(valid(move_computer) == False):
             move_computer= str(random.randint(1,9))
         computer(move_computer)
         moves+=1
-
+    #The computer wins
     if win_computer() == True:
         print("The computer wins!")
         show_board(board, board_positions)
         break
-        
+    #The player wins    
     elif win_player() == True:
         print("You win!")
         show_board(board, board_positions)
         break
-            
+    #There is a tie        
     elif win_player() == False and win_computer() == False and moves == 9:
         print("It's a tie!")
         show_board(board, board_positions)
