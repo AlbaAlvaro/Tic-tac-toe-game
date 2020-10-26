@@ -39,7 +39,7 @@ def valid(move):
         return False
 
 #Function win_player looks if the condition to win the game is met, if there are three X in a row.
-def win_player():
+def win_player(board):
     win = False
     if board["1"] == "X" and  board["2"] == "X" and board["3"] == "X":
         win = True
@@ -61,7 +61,7 @@ def win_player():
     return win
 
 #Function win_computer looks if the condition to win the game is met, if there are three O in a row.
-def win_computer():
+def win_computer(board):
     win = False
     if board["1"] == "O" and  board["2"] == "O" and board["3"] == "O":
         win = True
@@ -86,30 +86,30 @@ while True:
     show_board(board, board_positions)
     move_player=input("Choose a position in the board: ")
     #If the computer has not won and the moves are less than 9 the player chooses an option, if the option is not valid it keeps asking for an option
-    if(win_computer() == False and moves<=9):
+    if(win_computer(board) == False and moves<=9):
         while(valid(move_player) == False):
             move_player=input("That position is not valid, choose another position in the board: ")
         player(move_player)
         moves+=1
     #If the player has not won and the moves are less than 9 the computer chooses an option, if the option is not valid it keeps giving numbers until is valid
     move_computer= str(random.randint(1,9))
-    if(win_player() == False and moves<=9):
+    if(win_player(board) == False and moves<=9):
         while(valid(move_computer) == False):
             move_computer= str(random.randint(1,9))
         computer(move_computer)
         moves+=1
     #The computer wins
-    if win_computer() == True:
+    if win_computer(board) == True:
         print("The computer wins!")
         show_board(board, board_positions)
         break
     #The player wins    
-    elif win_player() == True:
+    elif win_player(board) == True:
         print("You win!")
         show_board(board, board_positions)
         break
     #There is a tie        
-    elif win_player() == False and win_computer() == False and moves == 9:
+    elif win_player(board) == False and win_computer(board) == False and moves == 9:
         print("It's a tie!")
         show_board(board, board_positions)
         break
